@@ -1,0 +1,26 @@
+.tile {
+  width: 32px;
+  height: 32px;
+  //border: 2px solid black;
+  background-size: contain;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.concealed {
+  background-image: url('../assets/concealed.png');
+}
+
+.mines0 {
+  background-image: url('../assets/mines0.png');
+}
+
+.mines1 {
+  background-image: url('../assets/mines1.png');
+}
+
+.mines2 {
+  background-image: url('../assets/mines2.png');
+}
