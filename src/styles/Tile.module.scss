@@ -1,26 +1,91 @@
 .tile {
   width: 32px;
   height: 32px;
-  //border: 2px solid black;
-  background-size: contain;
-
-  &:hover {
-    cursor: pointer;
-  }
+  //background-size: contain;
 }
 
+
 .concealed {
+  width: 32px;
+  height: 32px;
   background-image: url('../assets/concealed.png');
 }
 
+.mine {
+  width: 32px;
+  height: 32px;
+  background-image: url('../assets/mine.png');
+}
+
+.mineExplode {
+  width: 32px;
+  height: 32px;
+  background-image: url('../assets/mine_explode.png');
+
+}
+
 .mines0 {
+  width: 32px;
+  height: 32px;
   background-image: url('../assets/mines0.png');
 }
 
 .mines1 {
+  width: 32px;
+  height: 32px;
   background-image: url('../assets/mines1.png');
 }
 
 .mines2 {
+  width: 32px;
+  height: 32px;
   background-image: url('../assets/mines2.png');
+}
+
+.mines3 {
+  width: 32px;
+  height: 32px;
+  background-image: url('../assets/mines3.png');
+}
+
+.mines4 {
+  width: 32px;
+  height: 32px;
+  background-image: url('../assets/mines4.png');
+}
+
+.mines5 {
+  width: 32px;
+  height: 32px;
+  background-image: url('../assets/mines5.png');
+}
+
+.mines6 {
+  width: 32px;
+  height: 32px;
+  background-image: url('../assets/mines6.png');
+}
+
+.mines7 {
+  width: 32px;
+  height: 32px;
+  background-image: url('../assets/mines7.png');
+}
+
+.mines8 {
+  width: 32px;
+  height: 32px;
+  background-image: url('../assets/mines8.png');
+}
+
+.flagged {
+  width: 32px;
+  height: 32px;
+  background-image: url('../assets/flagged.png');
+}
+
+.flaggedIncorrect {
+  width: 32px;
+  height: 32px;
+  background-image: url('../assets/flagged_incorrect.png');
 }

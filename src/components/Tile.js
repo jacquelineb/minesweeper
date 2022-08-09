@@ -1,34 +1,49 @@
 import React from 'react';
 import style from '../styles/Tile.module.scss';
 
-const Tile = ({ row, col, revealTile, flagTile, tile }) => {
+const Tile = ({ revealTile, flagTile, tile }) => {
+  // just so i can see which tiles are mines
   let tileView;
-  if (tile.isFlagged) {
-    tileView = 'F';
-  } else if (!tile.isConcealed) {
-    tileView = tile.numSurroundingMines;
-  } else {
-    if (tile.isMine) {
-      tileView = '.';
+  if (tile.value === 'M') {
+    tileView = '.';
+  }
+
+  let classList = [style.tile];
+  if (!tile.isConcealed && !tile.isFlagged) {
+    if (tile.value === 'M') {
+      // plain mine
+      classList.push(style.mine);
+    } else if (tile.value === 'X') {
+      // exploded mine
+      classList.push(style.mineExplode);
+    } else {
+      // numbered tile
+      classList.push(style['mines' + tile.numSurroundingMines]);
     }
+  } else if (
+    (tile.isConcealed && tile.isFlagged) ||
+    (!tile.isConcealed && tile.isFlagged && tile.value === 'M')
+  ) {
+    // plain flag
+    classList.push(style.flagged);
+  } else if (!tile.isConcealed && tile.isFlagged && tile.value !== 'M') {
+    // bad flag
+    classList.push(style.flaggedIncorrect);
+  } else {
+    // concealed tile
+    classList.push(style.concealed);
   }
 
   return (
     <div
-      className={`${style.tile} ${
-        tile.isConcealed ? style.concealed : `${style['mines' + tile.numSurroundingMines]}`
-      }`}
-      data-row={row}
-      data-col={col}
+      className={style.tileContainer}
       onClick={revealTile}
       onContextMenu={(e) => {
         e.preventDefault();
-        console.log('flagging tile');
-        console.log(+e.target.dataset.row, +e.target.dataset.col);
         flagTile();
       }}
     >
-      {tileView}
+      <div className={classList.join(' ')}>{tileView}</div>
     </div>
   );
 };
