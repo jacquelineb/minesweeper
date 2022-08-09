@@ -19,10 +19,9 @@ const useTilesReducer = (initialTiles) => {
               updatedTiles[i] &&
               updatedTiles[i][j] &&
               updatedTiles[i][j].isConcealed &&
-              !updatedTiles[i][j].isFLagged &&
+              !updatedTiles[i][j].isFlagged &&
               updatedTiles[i][j].value !== 'M'
             ) {
-              //updatedTiles[i][j].isConcealed = false;
               revealSafeArea(i, j);
             }
           }
