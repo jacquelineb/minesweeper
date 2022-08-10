@@ -1,0 +1,17 @@
+.container {
+  text-align: left;
+}
+
+.hidden {
+  display: none;
+}
+
+.difficultyList {
+  z-index: 2;
+  position: absolute;
+  list-style: none;
+  text-align: left;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
