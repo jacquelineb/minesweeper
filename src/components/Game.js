@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Tiles from './Tiles';
+import Display from './Display';
+import DifficultyMenu from './DifficultyMenu';
 import style from '../styles/Game.module.scss';
 import useTilesReducer from '../hooks/useTilesReducer';
-
-const DIFFICULTIES = [
-  { level: 'beginner', numMines: 10, numRows: 9, numCols: 9 },
-  { level: 'intermediate', numMines: 40, numRows: 16, numCols: 16 },
-  { level: 'expert', numMines: 99, numRows: 16, numCols: 30 },
-];
-
-const DEFAULT_DIFFICULTY = DIFFICULTIES[0];
+import { DIFFICULTIES } from '../utils/constants';
 
 const Game = () => {
-  const [difficulty, setDifficulty] = useState(DEFAULT_DIFFICULTY);
+  const [difficulty, setDifficulty] = useState(DIFFICULTIES[0]);
   const [potentialNumMinesLeft, setPotentialNumMinesLeft] = useState(difficulty.numMines);
   const [gameStatus, setGameStatus] = useState(0); // win (1), lose (-1), or tbd (0)
-  const [timer, setTimer] = useState(0);
   const [tiles, tilesDispatch] = useTilesReducer([]);
+
+  const timerId = useRef();
+  const timerIsActive = useRef(false);
+  const [secondsLapsed, setSecondsLapsed] = useState(0);
 
   console.log('rendering');
   useEffect(() => {
@@ -24,39 +22,59 @@ const Game = () => {
   }, [difficulty]);
 
   useEffect(() => {
-    console.log('checking game status');
     if (tiles.length && gameStatus !== 'L') {
-      if (checkGameIsWon()) {
+      const gameIsWon = (() => {
+        for (const row of tiles) {
+          for (const tile of row) {
+            if (tile.isConcealed && tile.value !== 'M') {
+              return false;
+            }
+          }
+        }
+        return true;
+      })();
+
+      if (gameIsWon) {
         setGameStatus('W');
+        stopTimer();
       }
     }
   }, [tiles, gameStatus]);
+
+  const startTimer = () => {
+    timerId.current = setInterval(() => {
+      setSecondsLapsed((prevState) => prevState + 1);
+    }, 1000);
+  };
+
+  const stopTimer = () => {
+    clearInterval(timerId.current);
+    timerId.current = null;
+    timerIsActive.current = false;
+  };
 
   const resetGame = () => {
     tilesDispatch({ type: 'INITIALIZE_TILES', payload: { ...difficulty } });
     setGameStatus(0);
     setPotentialNumMinesLeft(difficulty.numMines);
-  };
-
-  const checkGameIsWon = () => {
-    for (const row of tiles) {
-      for (const tile of row) {
-        if (tile.isConcealed && tile.value !== 'M') {
-          return false;
-        }
-      }
-    }
-    return true;
+    stopTimer();
+    setSecondsLapsed(0);
   };
 
   const handleClick = (row, col) => {
+    if (!timerIsActive.current) {
+      timerIsActive.current = true;
+      startTimer();
+    }
+
     if (tiles[row][col].isConcealed && !tiles[row][col].isFlagged) {
       if (tiles[row][col].value === 'M') {
+        setGameStatus('L');
+        stopTimer();
         tilesDispatch({
           type: 'EXPLODE_MINE',
           payload: { tileCoord: { row, col } },
         });
-        setGameStatus('L');
         tilesDispatch({ type: 'REVEAL_MINES_AND_FLAGS' });
       } else {
         tilesDispatch({
@@ -82,8 +100,14 @@ const Game = () => {
     }
   };
 
+  const handleDifficultyChange = (newDifficulty) => {
+    setDifficulty(newDifficulty);
+  };
+
   return (
-    <>
+    <div className={style.container}>
+      <DifficultyMenu currDifficulty={difficulty} selectDifficulty={handleDifficultyChange} />
+      <Display time={secondsLapsed} numMines={potentialNumMinesLeft} status={gameStatus} />
       <div className={`${style.tilesContainer} ${style[difficulty.level]}`}>
         <Tiles
           tiles={tiles}
@@ -99,9 +123,7 @@ const Game = () => {
           }}
         />
       </div>
-      <div>timer</div>
-      <div>num mines left: {potentialNumMinesLeft}</div>
-      <div>game status: {gameStatus}</div>
+
       <button
         onClick={() => {
           resetGame();
@@ -109,7 +131,7 @@ const Game = () => {
       >
         newgame
       </button>
-    </>
+    </div>
   );
 };
 
