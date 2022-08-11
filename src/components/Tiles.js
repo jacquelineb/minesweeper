@@ -1,7 +1,7 @@
 import React from 'react';
 import Tile from './Tile';
 
-const Tiles = ({ tiles, onClick, onRightClick }) => {
+const Tiles = ({ tiles, onClickTile, onRightClickTile }) => {
   return (
     <>
       {tiles.map((row, rowIndex) => {
@@ -9,9 +9,9 @@ const Tiles = ({ tiles, onClick, onRightClick }) => {
           return (
             <Tile
               key={`${rowIndex}-${colIndex}`}
-              revealTile={() => onClick(rowIndex, colIndex)}
+              revealTile={() => onClickTile(rowIndex, colIndex)}
               flagTile={() => {
-                onRightClick(rowIndex, colIndex);
+                onRightClickTile(rowIndex, colIndex);
               }}
               tile={tile}
             />
