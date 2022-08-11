@@ -2,13 +2,6 @@ import React, { useEffect } from 'react';
 import style from '../styles/Tile.module.scss';
 
 const Tile = ({ revealTile, flagTile, tile }) => {
-  console.log('A TILE');
-  // just so i can see which tiles are mines
-  let tileView;
-  if (tile.value === 'M') {
-    tileView = '.';
-  }
-
   let classList = [style.tile];
   if (!tile.isConcealed && !tile.isFlagged) {
     if (tile.value === 'M') {
@@ -47,9 +40,7 @@ const Tile = ({ revealTile, flagTile, tile }) => {
         e.preventDefault();
         flagTile();
       }}
-    >
-      {tileView}
-    </div>
+    ></div>
   );
 };
 
