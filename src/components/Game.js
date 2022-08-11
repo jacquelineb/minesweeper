@@ -17,7 +17,6 @@ const Game = () => {
   const timerIsActive = useRef(false);
   const [secondsLapsed, setSecondsLapsed] = useState(0);
 
-  console.log('rendering');
   useEffect(() => {
     resetGame();
   }, [difficulty]);
