@@ -1,8 +1,21 @@
+.container {
+  width: max-content;
+  margin: 20px auto;
+  padding: 20px 15px;
+  background-color: #AEAEAE;
+  border-top: 4px solid #E1E1E1;
+  border-left: 4px solid #E1E1E1;
+  border-right: 4px solid #919191;
+  border-bottom: 4px solid #919191;
+}
+
 .tilesContainer {
-  display: inline-grid;
-  background-color: rgb(200, 200, 200);
+  display: grid;
+  background-color: #848484;
   border: 4px solid #515151;
   justify-content: center;
+  width: max-content;
+  margin: auto;
 }
 
 .beginner {
