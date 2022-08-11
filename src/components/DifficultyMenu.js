@@ -19,9 +19,9 @@ const DifficultyMenu = ({ currDifficulty, selectDifficulty }) => {
         {currDifficulty.level.toUpperCase()}
       </div>
       <ul className={`${style.difficultyList} ${!dropdownIsActive ? style.hidden : null}`}>
-        {DIFFICULTIES.map((difficulty) => {
+        {DIFFICULTIES.map((difficulty, idx) => {
           return (
-            <li onClick={() => selectDifficulty({ ...difficulty })}>
+            <li key={idx} onClick={() => selectDifficulty({ ...difficulty })}>
               {difficulty.level.toUpperCase()}
             </li>
           );
