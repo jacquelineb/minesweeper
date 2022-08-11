@@ -5,7 +5,8 @@ const useTilesReducer = (initialTiles) => {
 
   function reducer(tiles, action) {
     const updatedTiles = tiles.map((row) => {
-      return row.map((tile) => ({ ...tile }));
+      //return row.map((tile) => ({ ...tile }));
+      return row.map((tile) => tile);
     });
 
     const revealSafeArea = (row, col) => {
@@ -47,7 +48,7 @@ const useTilesReducer = (initialTiles) => {
     };
 
     switch (action.type) {
-      case 'REVEAL_SAFE_TILES': {
+      case 'REVEAL_SAFE_AREA': {
         const { row, col } = action.payload.tileCoord;
         revealSafeArea(row, col);
         return updatedTiles;
@@ -77,6 +78,17 @@ const useTilesReducer = (initialTiles) => {
           row.forEach((tile) => {
             if (tile.value === 'M' || tile.isFlagged) {
               tile.isConcealed = false;
+            }
+          });
+        });
+        return updatedTiles;
+      }
+
+      case 'FLAG_ALL_MINES': {
+        updatedTiles.forEach((row) => {
+          row.forEach((tile) => {
+            if (tile.value === 'M' && !tile.isFlagged) {
+              tile.isFlagged = true;
             }
           });
         });

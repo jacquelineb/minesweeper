@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { DIFFICULTIES } from '../utils/constants';
 import Tiles from './Tiles';
 import Display from './Display';
 import DifficultyMenu from './DifficultyMenu';
-import style from '../styles/Game.module.scss';
 import useTilesReducer from '../hooks/useTilesReducer';
-import { DIFFICULTIES } from '../utils/constants';
+import explosion from '../assets/explosion.wav';
+import style from '../styles/Game.module.scss';
 
 const Game = () => {
   const [difficulty, setDifficulty] = useState(DIFFICULTIES[0]);
@@ -41,6 +42,12 @@ const Game = () => {
     }
   }, [tiles, gameStatus]);
 
+  useEffect(() => {
+    if (gameStatus === 'W') {
+      tilesDispatch({ type: 'FLAG_ALL_MINES' });
+    }
+  }, [gameStatus]);
+
   const startTimer = () => {
     timerId.current = setInterval(() => {
       setSecondsLapsed((prevState) => prevState + 1);
@@ -69,8 +76,11 @@ const Game = () => {
 
     if (tiles[row][col].isConcealed && !tiles[row][col].isFlagged) {
       if (tiles[row][col].value === 'M') {
+        const audio = new Audio(explosion);
+        audio.play();
         setGameStatus('L');
         stopTimer();
+
         tilesDispatch({
           type: 'EXPLODE_MINE',
           payload: { tileCoord: { row, col } },
@@ -78,7 +88,7 @@ const Game = () => {
         tilesDispatch({ type: 'REVEAL_MINES_AND_FLAGS' });
       } else {
         tilesDispatch({
-          type: 'REVEAL_SAFE_TILES',
+          type: 'REVEAL_SAFE_AREA',
           payload: { tileCoord: { row, col } },
         });
       }
@@ -105,33 +115,33 @@ const Game = () => {
   };
 
   return (
-    <div className={style.container}>
-      <DifficultyMenu currDifficulty={difficulty} selectDifficulty={handleDifficultyChange} />
-      <Display time={secondsLapsed} numMines={potentialNumMinesLeft} status={gameStatus} />
-      <div className={`${style.tilesContainer} ${style[difficulty.level]}`}>
-        <Tiles
-          tiles={tiles}
-          onClick={(row, col) => {
-            if (!gameStatus) {
-              handleClick(row, col);
-            }
-          }}
-          onRightClick={(row, col) => {
-            if (!gameStatus) {
-              handleRightClick(row, col);
-            }
-          }}
+    <>
+      <div className={style.container}>
+        <DifficultyMenu currDifficulty={difficulty} selectDifficulty={handleDifficultyChange} />
+        <Display
+          time={secondsLapsed}
+          numMines={potentialNumMinesLeft}
+          status={gameStatus}
+          onClick={resetGame}
         />
-      </div>
 
-      <button
-        onClick={() => {
-          resetGame();
-        }}
-      >
-        newgame
-      </button>
-    </div>
+        <div className={`${style.tilesContainer} ${style[difficulty.level]}`}>
+          <Tiles
+            tiles={tiles}
+            onClickTile={(row, col) => {
+              if (!gameStatus) {
+                handleClick(row, col);
+              }
+            }}
+            onRightClickTile={(row, col) => {
+              if (!gameStatus) {
+                handleRightClick(row, col);
+              }
+            }}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 
