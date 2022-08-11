@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from '../styles/Tile.module.scss';
 
 const Tile = ({ revealTile, flagTile, tile }) => {
+  console.log('A TILE');
   // just so i can see which tiles are mines
   let tileView;
   if (tile.value === 'M') {
@@ -36,14 +37,18 @@ const Tile = ({ revealTile, flagTile, tile }) => {
 
   return (
     <div
-      className={style.tileContainer}
-      onClick={revealTile}
+      className={classList.join(' ')}
+      onMouseUp={(e) => {
+        if (e.button === 0) {
+          revealTile();
+        }
+      }}
       onContextMenu={(e) => {
         e.preventDefault();
         flagTile();
       }}
     >
-      <div className={classList.join(' ')}>{tileView}</div>
+      {tileView}
     </div>
   );
 };
