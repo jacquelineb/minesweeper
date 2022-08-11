@@ -3,7 +3,7 @@ import style from '../styles/Display.module.scss';
 import mine_icon from '../assets/mine_icon.png';
 import timer from '../assets/timer.png';
 
-const Display = ({ time, numMines, status }) => {
+const Display = ({ time, numMines, status, onClick }) => {
   let displayedTime;
   if (time >= 3600) {
     displayedTime = '99:99';
@@ -16,7 +16,9 @@ const Display = ({ time, numMines, status }) => {
         <img src={mine_icon} alt='Potential number of mines remaining' />
         <span>{numMines}</span>
       </div>
-      <div>status: {status}</div>
+      <button className={style.button} onClick={onClick}>
+        {status === 'L' ? 'You lost!' : status === 'W' ? 'You won!' : 'NEW GAME'}
+      </button>
       <div>
         <img src={timer} alt={'Time lapsed'} />
         <span>{displayedTime}</span>
