@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import style from '../styles/Tile.module.scss';
 
 const Tile = ({ revealTile, flagTile, tile }) => {
