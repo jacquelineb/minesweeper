@@ -1,6 +1,7 @@
 .container {
   text-align: left;
   width: max-content;
+  background-color: beige;
 
   &:hover {
     cursor: pointer;
@@ -11,12 +12,20 @@
   display: none;
 }
 
+.menuToggler {
+  user-select: none;
+}
+
 .difficultyList {
   z-index: 2;
   position: absolute;
   list-style: none;
   text-align: left;
-  background-color: white;
   margin: 0;
   padding: 0;
+  background-color: beige;
+
+  li:hover {
+    background-color: lightgray;
+  }
 }

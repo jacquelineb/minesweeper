@@ -8,12 +8,16 @@ const DifficultyMenu = ({ currDifficulty, selectDifficulty }) => {
   return (
     <div
       className={style.container}
-      onClick={() => setDropdownIsActive((prevState) => !prevState)}
       onMouseLeave={() => {
         setDropdownIsActive(false);
       }}
     >
-      <div>{currDifficulty.level.toUpperCase()}</div>
+      <div
+        className={style.menuToggler}
+        onClick={() => setDropdownIsActive((prevState) => !prevState)}
+      >
+        {currDifficulty.level.toUpperCase()}
+      </div>
       <ul className={`${style.difficultyList} ${!dropdownIsActive ? style.hidden : null}`}>
         {DIFFICULTIES.map((difficulty) => {
           return (
