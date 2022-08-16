@@ -49,7 +49,6 @@ const createTiles = (numRows, numCols, numMines) => {
     return numAdjacentMines;
   }
 
-  console.log(tiles);
   return tiles;
 };
 
