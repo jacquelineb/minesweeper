@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import createTiles from '../utils/createTiles';
 import explosionSound from '../assets/explosion.wav';
-import flagSound from '../assets/flag.ogg';
-import unflagSound from '../assets/unflag.ogg';
+import flagSound from '../assets/flag.wav';
+import unflagSound from '../assets/unflag.wav';
 
 const useGame = () => {
   const [tiles, setTiles] = useState();
