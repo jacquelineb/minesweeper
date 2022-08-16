@@ -32,3 +32,7 @@
   grid-template-columns: repeat(30, auto);
   grid-template-rows: repeat(16, auto);
 }
+
+.disabled {
+  pointer-events: none;
+}

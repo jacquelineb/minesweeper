@@ -68,7 +68,11 @@ const Game = () => {
         onClick={resetGame}
       />
 
-      <div className={`${style.tilesContainer} ${style[difficulty.level]}`}>
+      <div
+        className={`${style.tilesContainer} ${style[difficulty.level]} ${
+          gameStatus ? style.disabled : ''
+        }`}
+      >
         <Tiles tiles={tiles} onClickTile={handleClick} onRightClickTile={handleFlag} />
       </div>
     </div>
