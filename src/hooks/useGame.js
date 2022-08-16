@@ -3,6 +3,7 @@ import createTiles from '../utils/createTiles';
 import explosionSound from '../assets/explosion.wav';
 import flagSound from '../assets/flag.wav';
 import unflagSound from '../assets/unflag.wav';
+import victorySound from '../assets/victory.wav';
 
 const useGame = () => {
   const [tiles, setTiles] = useState();
@@ -24,6 +25,8 @@ const useGame = () => {
       })();
 
       if (gameIsWon) {
+        const audio = new Audio(victorySound);
+        audio.play();
         setGameStatus('W');
       }
     }
