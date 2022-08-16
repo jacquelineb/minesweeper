@@ -43,9 +43,6 @@ const Tile = ({ revealTile, flagTile, tile }) => {
           flagTile();
         }
       }}
-      onContextMenu={(e) => {
-        e.preventDefault();
-      }}
     ></div>
   );
 };
