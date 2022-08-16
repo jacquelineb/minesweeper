@@ -12,7 +12,7 @@ const Tile = ({ revealTile, flagTile, tile }) => {
       classList.push(style.mineExplode);
     } else {
       // numbered tile
-      classList.push(style['mines' + tile.numSurroundingMines]);
+      classList.push(style['mines' + tile.value]);
     }
   } else if (
     (tile.isConcealed && tile.isFlagged) ||
@@ -33,12 +33,18 @@ const Tile = ({ revealTile, flagTile, tile }) => {
       className={classList.join(' ')}
       onMouseUp={(e) => {
         if (e.button === 0) {
+          // left click
           revealTile();
+        }
+      }}
+      onMouseDown={(e) => {
+        if (e.button === 2) {
+          // right click
+          flagTile();
         }
       }}
       onContextMenu={(e) => {
         e.preventDefault();
-        flagTile();
       }}
     ></div>
   );
