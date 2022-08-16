@@ -27,12 +27,13 @@
 }
 
 .button {
-  background-color: #E1E1E1;
+  background-color: rgb(231, 231, 231);
   font-family: inherit;
   font-size: 16px;
+  font-weight: bold;
 
   &:hover {
-  background-color: white;
+    background-color: white;
     cursor: pointer;
   }
 }

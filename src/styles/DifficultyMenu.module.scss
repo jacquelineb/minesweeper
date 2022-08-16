@@ -1,7 +1,6 @@
 .container {
   text-align: left;
   width: max-content;
-  background-color: beige;
 
   &:hover {
     cursor: pointer;
@@ -14,6 +13,16 @@
 
 .menuToggler {
   user-select: none;
+  background-color: transparent;
+
+  &:before {
+    content: '>';
+    padding-right: 3px;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
 .difficultyList {
@@ -23,9 +32,25 @@
   text-align: left;
   margin: 0;
   padding: 0;
-  background-color: beige;
+  background-color: white;
+  border: 1px solid black;
+}
 
-  li:hover {
-    background-color: lightgray;
+.dropdownItem {
+  padding: 0 6px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: rgb(231, 231, 231);
+    font-weight: bold;
+  }
+
+  &:before {
+    content: '>';
+    opacity: 0;
+  }
+
+  &:hover:before {
+    opacity: 1;
   }
 }

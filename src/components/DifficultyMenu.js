@@ -23,6 +23,7 @@ const DifficultyMenu = ({ currDifficulty, selectDifficulty }) => {
           return (
             <li
               key={idx}
+              className={style.dropdownItem}
               onClick={() => {
                 selectDifficulty({ ...difficulty });
                 setDropdownIsActive(false);
