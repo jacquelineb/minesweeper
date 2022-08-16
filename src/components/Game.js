@@ -17,6 +17,10 @@ const Game = () => {
   const [secondsLapsed, setSecondsLapsed] = useState(0);
 
   useEffect(() => {
+    return () => clearInterval(timerId.current);
+  }, []);
+
+  useEffect(() => {
     const { numRows, numCols, numMines } = difficulty;
     resetGame(numRows, numCols, numMines);
   }, [difficulty]);
