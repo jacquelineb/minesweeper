@@ -17,7 +17,7 @@ const Display = ({ time, numMines, status, onClick }) => {
         <span>{numMines}</span>
       </div>
       <button className={style.button} onClick={onClick}>
-        {status === 'L' ? 'You lost!' : status === 'W' ? 'You won!' : 'NEW GAME'}
+        {status === 'L' ? 'YOU LOST!' : status === 'W' ? 'YOU WON!' : 'NEW GAME'}
       </button>
       <div>
         <img src={timer} alt={'Time lapsed'} />
