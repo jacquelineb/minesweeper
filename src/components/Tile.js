@@ -1,36 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import style from '../styles/Tile.module.scss';
 
 const Tile = ({ revealTile, flagTile, tile }) => {
-  let classList = [style.tile];
-  if (!tile.isConcealed && !tile.isFlagged) {
-    if (tile.value === 'M') {
-      // plain mine
-      classList.push(style.mine);
-    } else if (tile.value === 'X') {
-      // exploded mine
-      classList.push(style.mineExplode);
+  const [tileStyle, setTileStyle] = useState('');
+  useEffect(() => {
+    if (!tile.isConcealed && !tile.isFlagged) {
+      if (tile.value === 'M') {
+        // plain mine
+        setTileStyle(style.mine);
+      } else if (tile.value === 'X') {
+        // exploded mine
+        setTileStyle(style.mineExplode);
+      } else {
+        // numbered tile
+        setTileStyle(style['mines' + tile.value]);
+      }
+    } else if (
+      (tile.isConcealed && tile.isFlagged) ||
+      (!tile.isConcealed && tile.isFlagged && tile.value === 'M')
+    ) {
+      // plain flag
+      setTileStyle(style.flagged);
+    } else if (!tile.isConcealed && tile.isFlagged && tile.value !== 'M') {
+      // bad flag
+      setTileStyle(style.flaggedIncorrect);
     } else {
-      // numbered tile
-      classList.push(style['mines' + tile.value]);
+      // concealed tile
+      setTileStyle(style.concealed);
     }
-  } else if (
-    (tile.isConcealed && tile.isFlagged) ||
-    (!tile.isConcealed && tile.isFlagged && tile.value === 'M')
-  ) {
-    // plain flag
-    classList.push(style.flagged);
-  } else if (!tile.isConcealed && tile.isFlagged && tile.value !== 'M') {
-    // bad flag
-    classList.push(style.flaggedIncorrect);
-  } else {
-    // concealed tile
-    classList.push(style.concealed);
-  }
+  }, [tile]);
 
   return (
     <div
-      className={classList.join(' ')}
+      className={`${style.tile} ${tileStyle}`}
       onMouseUp={(e) => {
         if (e.button === 0) {
           // left click
