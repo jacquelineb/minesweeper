@@ -3,11 +3,8 @@ import { DIFFICULTIES } from '../utils/constants';
 import Tiles from './Tiles';
 import Display from './Display';
 import DifficultyMenu from './DifficultyMenu';
-import useTilesReducer from '../hooks/useTilesReducer';
-import explosion from '../assets/explosion.wav';
-import style from '../styles/Game.module.scss';
-
 import useGame from '../hooks/useGame';
+import style from '../styles/Game.module.scss';
 
 const Game = () => {
   const [difficulty, setDifficulty] = useState(DIFFICULTIES[0]);
