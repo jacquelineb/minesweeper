@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { DIFFICULTIES } from '../utils/constants';
-import Tiles from './Tiles';
-import Display from './Display';
 import DifficultyMenu from './DifficultyMenu';
+import Display from './Display';
+import Tiles from './Tiles';
 import useGame from '../hooks/useGame';
 import style from '../styles/Game.module.scss';
 
 const Game = () => {
-  const [difficulty, setDifficulty] = useState(DIFFICULTIES[0]);
-
-  const { tiles, gameStatus, numMinesRemaining, handleNewGame, handleReveal, handleFlag } =
-    useGame();
-
   const timerId = useRef();
   const timerIsActive = useRef(false);
   const [secondsLapsed, setSecondsLapsed] = useState(0);
+  const [difficulty, setDifficulty] = useState(DIFFICULTIES[0]);
+  const { tiles, gameStatus, numMinesRemaining, handleNewGame, handleReveal, handleFlag } =
+    useGame();
 
   useEffect(() => {
     return () => clearInterval(timerId.current);

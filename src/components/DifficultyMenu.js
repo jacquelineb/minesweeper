@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import style from '../styles/DifficultyMenu.module.scss';
 import { DIFFICULTIES } from '../utils/constants';
+import style from '../styles/DifficultyMenu.module.scss';
 
 const DifficultyMenu = ({ currDifficulty, selectDifficulty }) => {
   const [dropdownIsActive, setDropdownIsActive] = useState(false);

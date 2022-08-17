@@ -1,7 +1,7 @@
 import React from 'react';
-import style from '../styles/Display.module.scss';
 import mine_icon from '../assets/mine_icon.png';
 import timer from '../assets/timer.png';
+import style from '../styles/Display.module.scss';
 
 const Display = ({ time, numMines, status, onClick }) => {
   let displayedTime;
