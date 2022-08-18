@@ -28,6 +28,7 @@ const useGame = () => {
         const audio = new Audio(victorySound);
         audio.play();
         setGameStatus('W');
+        setNumMinesRemaining(0);
       }
     }
   }, [tiles]);
