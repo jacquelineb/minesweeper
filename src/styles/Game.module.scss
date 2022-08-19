@@ -1,14 +1,11 @@
-.container {
-  width: max-content;
-  margin: 100px auto;
-  padding: 20px 15px;
-  background-color: #BA6761;
-  border-top: 4px solid #DCA195;
-  border-left: 4px solid #DCA195;
-  border-right: 4px solid #4E282E;
-  border-bottom: 4px solid #4E282E;
-  user-select: none;
-  animation: fade-in 0.2s;
+$primary-color: #BA6761;
+$primary-color-light: #DCA195;
+$primary-color-dark: #4E282E;
+$border-color: #1C1618;
+
+@mixin grid($rows, $cols) {
+  grid-template-rows: repeat($rows, auto);
+  grid-template-columns: repeat($cols, auto);
 }
 
 @keyframes fade-in {
@@ -16,28 +13,38 @@
   to {opacity: 1}
 }
 
+.container {
+  width: max-content;
+  margin: 100px auto;
+  padding: 20px 15px;
+  background-color: $primary-color;
+  border-top: 4px solid $primary-color-light;
+  border-left: 4px solid $primary-color-light;
+  border-right: 4px solid $primary-color-dark;
+  border-bottom: 4px solid $primary-color-dark;
+  user-select: none;
+  animation: fade-in 0.2s;
+}
+
 .tilesContainer {
   display: grid;
-  background-color: #4E282E;
-  border: 4px solid #1C1618;
+  background-color: $primary-color-dark;
+  border: 4px solid $border-color;
   justify-content: center;
   width: max-content;
   margin: auto;
 }
 
 .beginner {
-  grid-template-columns: repeat(9, auto);
-  grid-template-rows: repeat(9, auto);
+  @include grid(9, 9);
 }
 
 .intermediate {
-  grid-template-columns: repeat(16, auto);
-  grid-template-rows: repeat(16, auto);
+  @include grid(16, 16);
 }
 
 .expert {
-  grid-template-columns: repeat(30, auto);
-  grid-template-rows: repeat(16, auto);
+  @include grid(16, 30);
 }
 
 .disabled {
