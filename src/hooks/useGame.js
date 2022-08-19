@@ -28,7 +28,6 @@ const useGame = () => {
         const audio = new Audio(victorySound);
         audio.play();
         setGameStatus('W');
-        setNumMinesRemaining(0);
       }
     }
   }, [tiles]);
@@ -36,6 +35,7 @@ const useGame = () => {
   useEffect(() => {
     // When game is won, flag all the mines if not already flagged
     if (gameStatus === 'W') {
+      setNumMinesRemaining(0);
       setTiles((prevTiles) => {
         return prevTiles.map((rowOfTiles) => {
           return rowOfTiles.map((tile) => {
