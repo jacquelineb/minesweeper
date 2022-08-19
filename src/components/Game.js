@@ -60,7 +60,11 @@ const Game = () => {
   };
 
   return (
-    <div className={style.container} onContextMenu={(e) => e.preventDefault()}>
+    <div
+      key={difficulty.level}
+      className={style.container}
+      onContextMenu={(e) => e.preventDefault()}
+    >
       <DifficultyMenu currDifficulty={difficulty} selectDifficulty={handleDifficultyChange} />
 
       <Display
