@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import mine_icon from '../assets/mine_icon.png';
 import timer from '../assets/timer.png';
 import style from '../styles/Display.module.scss';
@@ -35,7 +35,7 @@ const Display = ({ time, numMines, status, onClick }) => {
         </button>
       </div>
       <div>
-        <img src={timer} alt={'Time lapsed'} />
+        <img src={timer} alt={'Timer icon'} />
         <span>{displayedTime}</span>
       </div>
     </div>
