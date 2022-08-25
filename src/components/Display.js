@@ -6,7 +6,6 @@ import style from '../styles/Display.module.scss';
 const Display = ({ time, numMines, status, onClick }) => {
   const [statusBtn, setStatusBtn] = useState({ animation: null, text: '' });
   useEffect(() => {
-    console.log('status changed');
     if (status === 'W') {
       setStatusBtn({ animation: style.bounce, text: 'YOU WON!' });
     } else if (status === 'L') {
