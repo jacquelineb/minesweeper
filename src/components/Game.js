@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { DIFFICULTIES } from '../utils/constants';
 import DifficultyMenu from './DifficultyMenu';
 import Display from './Display';
@@ -18,7 +18,7 @@ const Game = () => {
     return () => clearInterval(timerId.current);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const { numRows, numCols, numMines } = difficulty;
     resetGame(numRows, numCols, numMines);
   }, [difficulty]);
