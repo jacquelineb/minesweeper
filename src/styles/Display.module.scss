@@ -61,6 +61,11 @@
     transform: translateX(-28px) skewX(-30deg);
   }
 
+  &::before,
+  &::after {
+    animation: shine 0.5s;
+  }
+
   &:hover {
     cursor: pointer;
 
@@ -79,6 +84,12 @@
 
 .shakeX {
   animation: shakeX 0.2s;
+}
+
+@keyframes shine {
+  to {
+    transform: translateX(90px) skewX(-15deg);
+  }
 }
 
 @keyframes bounce {
