@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import useLongTouch from '../hooks/useLongTouch';
 import style from '../styles/Tile.module.scss';
 
 const Tile = ({ revealTile, flagTile, tile }) => {
   const [tileStyle, setTileStyle] = useState('');
+  const longTouchEvent = useLongTouch(flagTile, 400);
+
   useEffect(() => {
     if (!tile.isConcealed && !tile.isFlagged) {
       if (tile.value === 'M') {
@@ -45,6 +48,7 @@ const Tile = ({ revealTile, flagTile, tile }) => {
           flagTile();
         }
       }}
+      {...longTouchEvent}
     ></div>
   );
 };
